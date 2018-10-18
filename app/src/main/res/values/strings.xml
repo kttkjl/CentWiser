@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">CentWiser</string>
+
+    <string-array name="map_categories">
+        <item>Drop-in Centers</item>
+        <item>Employment and Training</item>
+        <item>Food Program + Services</item>
+    </string-array>
+
+    <string-array name="const_map_categories">
+        <item>DROPIN_CENTRE</item>
+        <item>EMPLOYMENT_AND_JOB_TRAINING</item>
+        <item>FOOD_PROGRAMS_AND_SERVICES</item>
+    </string-array>
+
+    <string name="title_activity_drop_in_map">Map</string>
+
 </resources>
