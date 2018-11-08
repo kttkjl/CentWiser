@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mapbox.mapboxsdk.maps.MapView;
+
 public class MainActivity extends AppCompatActivity {
+    private MapView mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +27,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             // Adapter view just KNOWS which thing is in the category
             System.out.println("Clicked position: " + i + ", row_id: " + l);
-            Intent intent = new Intent(MainActivity.this, GoogleMapActivity.class);
+            Intent intent = new Intent(MainActivity.this, MapboxActivity.class);
             intent.putExtra("map_category", const_map_categories[i]);
             startActivity(intent);
             }
         });
-
     }
 }
