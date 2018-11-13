@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -18,11 +19,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MapboxActivity extends AppCompatActivity {
     private MapView mapView;
 
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
+
+    private ArrayList<Feature> features;
 
     // URL to get contacts JSON
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/drop-in-centres/DROPIN_CENTRE.json";
@@ -112,8 +117,14 @@ public class MapboxActivity extends AppCompatActivity {
 
             if (jsonStr != null) {
                 try {
-                    JSONObject dropInCentres = new JSONObject(jsonStr);
-                    Log.i("fromjson", dropInCentres.toString());
+                    DataSetJsonParser jsonParser = new DataSetJsonParser();
+
+                    features = jsonParser.parse(jsonStr);
+
+                    Log.i("aaa", "comecome");
+                    for(Feature f : features) {
+                        Log.i("fromjson", f.toString());
+                    }
                 } catch (final JSONException e) {
                     Log.i("dropIn", "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
