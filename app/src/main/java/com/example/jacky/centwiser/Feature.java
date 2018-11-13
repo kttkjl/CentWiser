@@ -3,27 +3,27 @@ package com.example.jacky.centwiser;
 public class Feature {
     private String type;
 
-    private String Name;
+    private String name;
 
-    private String Description;
+    private String description;
 
-    private String Category;
+    private String category;
 
-    private String Hours;
+    private String hours;
 
-    private String Location;
+    private String location;
 
-    private String PC;
+    private String pc;
 
-    private String Phone;
+    private String phone;
 
-    private String Email;
+    private String email;
 
-    private String Website;
+    private String website;
 
-    private String X;
+    private String x;
 
-    private String Y;
+    private String y;
 
     public void setType(String type){
         this.type = type;
@@ -33,70 +33,99 @@ public class Feature {
         return this.type;
     }
 
-    public void setName(String Name){
-        this.Name = Name;
+    public void setName(String name){
+        this.name = name;
     }
     public String getName(){
-        return this.Name;
+        return this.name;
     }
-    public void setDescription(String Description){
-        this.Description = Description;
+    public void setDescription(String description){
+        this.description = description;
     }
     public String getDescription(){
-        return this.Description;
+        return this.description;
     }
-    public void setCategory(String Category){
-        this.Category = Category;
+    public void setCategory(String category){
+        this.category = category;
     }
     public String getCategory(){
-        return this.Category;
+        return this.category;
     }
-    public void setHours(String Hours){
-        this.Hours = Hours;
+    public void setHours(String hours){
+        this.hours = hours;
     }
     public String getHours(){
-        return this.Hours;
+        return this.hours;
     }
-    public void setLocation(String Location){
-        this.Location = Location;
+    public void setLocation(String location){
+        this.location = location;
     }
     public String getLocation(){
-        return this.Location;
+        return this.location;
     }
-    public void setPC(String PC){
-        this.PC = PC;
+    public void setPC(String pc){
+        this.pc = pc;
     }
     public String getPC(){
-        return this.PC;
+        return this.pc;
     }
-    public void setPhone(String Phone){
-        this.Phone = Phone;
+    public void setPhone(String phone){
+        this.phone = phone;
     }
     public String getPhone(){
-        return this.Phone;
+        return this.phone;
     }
-    public void setEmail(String Email){
-        this.Email = Email;
+    public void setEmail(String email){
+        this.email = email;
     }
     public String getEmail(){
-        return this.Email;
+        return this.email;
     }
-    public void setWebsite(String Website){
-        this.Website = Website;
+    public void setWebsite(String website){
+        this.website = website;
     }
     public String getWebsite(){
-        return this.Website;
+        return this.website;
     }
-    public void setX(String X){
-        this.X = X;
+    public void setX(String x){
+        this.x = x;
     }
     public String getX(){
-        return this.X;
+        return this.x;
     }
-    public void setY(String Y){
-        this.Y = Y;
+    public void setY(String y){
+        this.y = y;
     }
     public String getY(){
-        return this.Y;
+        return this.y;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(type);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(name);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(description);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(category);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(hours);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(location);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(pc);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(phone);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(email);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(x);
+        sb.append(System.getProperty("line.separator"));
+        sb.append(y);
+        sb.append(System.getProperty("line.separator"));
+
+        return (new String(sb));
     }
 }
