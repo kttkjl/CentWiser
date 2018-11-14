@@ -21,9 +21,9 @@ public class Feature {
 
     private String website;
 
-    private String x;
+    private double x;
 
-    private String y;
+    private double y;
 
     public void setType(String type){
         this.type = type;
@@ -87,16 +87,16 @@ public class Feature {
     public String getWebsite(){
         return this.website;
     }
-    public void setX(String x){
+    public void setX(double x){
         this.x = x;
     }
-    public String getX(){
+    public double getX(){
         return this.x;
     }
-    public void setY(String y){
+    public void setY(double y){
         this.y = y;
     }
-    public String getY(){
+    public double getY(){
         return this.y;
     }
     @Override

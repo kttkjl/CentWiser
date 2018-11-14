@@ -31,8 +31,8 @@ public class DataSetJsonParser {
             String phone = props.getString("Phone");
             String email = props.getString("Email");
             String website = props.getString("Website");
-            String x = props.getString("X");
-            String y = props.getString("Y");
+            double x = props.getDouble("X");
+            double y = props.getDouble("Y");
 
             Feature feature = new Feature();
             feature.setType(type);
