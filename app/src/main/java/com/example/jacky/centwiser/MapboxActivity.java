@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class MapboxActivity extends AppCompatActivity {
     private MapView mapView;
+    private MapboxMap mapboxMap;
 
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
@@ -47,10 +49,10 @@ public class MapboxActivity extends AppCompatActivity {
                         .target(new LatLng(49.2057179, -122.910956))
                         .zoom(12)
                         .build());
+                mapboxMap = mapbox;
+                new GetDropInCentres().execute();
             }
         });
-
-        new GetDropInCentres().execute();
     }
 
     @Override
@@ -161,6 +163,13 @@ public class MapboxActivity extends AppCompatActivity {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
+
+            for(Feature f : features) {
+                mapboxMap.addMarker(
+                        new MarkerOptions()
+                            .position(new LatLng(f.getY(), f.getX()))
+                );
+            }
         }
     }
 }
