@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -16,13 +15,11 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MapboxActivity extends AppCompatActivity {
+public class DropInCentreActivity extends AppCompatActivity {
     private MapView mapView;
     private MapboxMap mapboxMap;
 
@@ -38,7 +35,7 @@ public class MapboxActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, "pk.eyJ1IjoiaWxvYyIsImEiOiJjam55dmJlbmYxOXVzM2trajM3eno5bTIxIn0.jbJIOAYamYvN8QZNAk28bg");
-        setContentView(R.layout.activity_drop_in_map);
+        setContentView(R.layout.activity_drop_in_centre);
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
@@ -104,7 +101,7 @@ public class MapboxActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(MapboxActivity.this);
+            pDialog = new ProgressDialog(DropInCentreActivity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -120,13 +117,7 @@ public class MapboxActivity extends AppCompatActivity {
             if (jsonStr != null) {
                 try {
                     DataSetJsonParser jsonParser = new DataSetJsonParser();
-
                     features = jsonParser.parse(jsonStr);
-
-                    Log.i("aaa", "comecome");
-                    for(Feature f : features) {
-                        Log.i("fromjson", f.toString());
-                    }
                 } catch (final JSONException e) {
                     Log.i("dropIn", "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
