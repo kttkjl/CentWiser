@@ -33,8 +33,10 @@
         -->
 
         <activity
-            android:name=".MapboxActivity"
-            android:label="@string/title_activity_drop_in_map"></activity>
+            android:name=".DropInCentreActivity"
+            android:label="@string/title_activity_drop_in_map" />
+        <activity android:name=".EmploymentJobTrainingActivity" />
+        <activity android:name=".FoodProgramServices"></activity>
     </application>
 
 </manifest>
