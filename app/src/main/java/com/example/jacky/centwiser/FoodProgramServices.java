@@ -159,12 +159,12 @@ public class FoodProgramServices extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-//            for(Feature f : features) {
-//                mapboxMap.addMarker(
-//                        new MarkerOptions()
-//                            .position(new LatLng(f.getY(), f.getX()))
-//                );
-//            }
+            for(Feature f : features) {
+                mapboxMap.addMarker(
+                        new MarkerOptions()
+                            .position(new LatLng(f.getY(), f.getX()))
+                );
+            }
         }
     }
 }
