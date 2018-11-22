@@ -161,10 +161,10 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
                 pDialog.dismiss();
 
             for(Feature f : features) {
-//                mapboxMap.addMarker(
-//                        new MarkerOptions()
-//                            .position(new LatLng(f.getY(), f.getX()))
-//                );
+                mapboxMap.addMarker(
+                        new MarkerOptions()
+                            .position(new LatLng(f.getY(), f.getX()))
+                );
             }
         }
     }
