@@ -13,6 +13,8 @@
         <item>FOOD_PROGRAMS_AND_SERVICES</item>
     </string-array>
 
-    <string name="title_activity_drop_in_map">Map</string>
+    <string name="title_activity_drop_in_map">Drop-in Centres</string>
+    <string name="title_activity_emp_map">Employment and Job Training</string>
+    <string name="title_activity_food_map">Food Program and Services</string>
 
 </resources>

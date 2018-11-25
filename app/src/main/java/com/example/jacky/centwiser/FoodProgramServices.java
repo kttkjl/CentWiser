@@ -131,7 +131,7 @@ public class FoodProgramServices extends AppCompatActivity {
                     DataSetJsonParser jsonParser = new DataSetJsonParser();
                     features = jsonParser.parse(jsonStr);
                 } catch (final JSONException e) {
-                    Log.i("dropIn", "Json parsing error: " + e.getMessage());
+                    Log.i("FoodProgramServices", "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
