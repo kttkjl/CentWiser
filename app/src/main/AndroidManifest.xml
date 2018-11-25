@@ -35,8 +35,10 @@
         <activity
             android:name=".DropInCentreActivity"
             android:label="@string/title_activity_drop_in_map" />
-        <activity android:name=".EmploymentJobTrainingActivity" />
-        <activity android:name=".FoodProgramServices"></activity>
+        <activity android:name=".EmploymentJobTrainingActivity"
+            android:label="@string/title_activity_emp_map" />
+        <activity android:name=".FoodProgramServices"
+            android:label="@string/title_activity_food_map" />
     </application>
 
 </manifest>

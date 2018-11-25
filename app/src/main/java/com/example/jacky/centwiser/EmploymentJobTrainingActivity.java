@@ -33,8 +33,6 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     private ArrayList<Feature> features;
-    private FeatureCollection f;
-    private String geoJson;
 
     // URL to get contacts JSON
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/employment/EMPLOYMENT_AND_JOB_TRAINING.json";
@@ -129,7 +127,7 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
                     DataSetJsonParser jsonParser = new DataSetJsonParser();
                     features = jsonParser.parse(jsonStr);
                 } catch (final JSONException e) {
-                    Log.i("dropIn", "Json parsing error: " + e.getMessage());
+                    Log.i("EmploymentJobTraining", "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

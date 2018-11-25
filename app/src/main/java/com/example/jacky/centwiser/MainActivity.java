@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -17,35 +18,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView map_categories = findViewById(R.id.listview_map_categories);
+        Button btn_dropin = findViewById(R.id.btn_dropin);
+        Button btn_emp = findViewById(R.id.btn_emp_job);
+        Button btn_food = findViewById(R.id.btn_food);
 
-        // We grab a constant array for category
-        final String [] const_map_categories = getResources().getStringArray(R.array.const_map_categories);
-
-        map_categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        btn_dropin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Adapter view just KNOWS which thing is in the category
-                System.out.println("Clicked position: " + i + ", row_id: " + l);
-                Intent intent;
-
-                switch(i) {
-                    case 0:
-                        intent = new Intent(MainActivity.this, DropInCentreActivity.class);
-                        break;
-                    case 1:
-                        intent = new Intent(MainActivity.this, EmploymentJobTrainingActivity.class);
-                        break;
-                    case 2:
-                        intent = new Intent(MainActivity.this, FoodProgramServices.class);
-                        break;
-                    default:
-                        intent = new Intent(MainActivity.this, DropInCentreActivity.class);
-                        break;
-                }
-
-                intent.putExtra("map_category", const_map_categories[i]);
-                startActivity(intent);
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, DropInCentreActivity.class);
+                startActivity(i);
+            }
+        });
+        btn_emp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, EmploymentJobTrainingActivity.class);
+                startActivity(i);
+            }
+        });
+        btn_food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, FoodProgramServices.class);
+                startActivity(i);
             }
         });
     }
