@@ -3,11 +3,13 @@ package com.example.jacky.centwiser;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -36,6 +38,7 @@ public class DropInCentreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, "pk.eyJ1IjoiaWxvYyIsImEiOiJjam55dmJlbmYxOXVzM2trajM3eno5bTIxIn0.jbJIOAYamYvN8QZNAk28bg");
         setContentView(R.layout.activity_drop_in_centre);
+
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
@@ -156,11 +159,29 @@ public class DropInCentreActivity extends AppCompatActivity {
                 pDialog.dismiss();
 
             for(Feature f : features) {
+                String snippet = "";
+                snippet += "Description: " + f.getDescription() + "\n";
+                snippet += "Hours: " + f.getHours() + "\n";;
+                snippet += "Location: " + f.getLocation() + "\n";;
+                snippet += "Postcode: " + f.getPC() + "\n";;
+                snippet += "Phone: " + f.getPhone() + "\n";;
+                snippet += "Email: " + f.getEmail() + "\n";;
+                snippet += "Website: " + f.getWebsite() + "\n";;
                 mapboxMap.addMarker(
                         new MarkerOptions()
                             .position(new LatLng(f.getY(), f.getX()))
+                            .title(f.getName())
+                            .setSnippet(snippet)
                 );
             }
+
+            mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    mapboxMap.selectMarker(marker);
+                    return true;
+                }
+            });
         }
     }
 }
