@@ -2,19 +2,26 @@ package com.example.jacky.centwiser;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.style.sources.Source;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,6 +33,8 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     private ArrayList<Feature> features;
+    private FeatureCollection f;
+    private String geoJson;
 
     // URL to get contacts JSON
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/employment/EMPLOYMENT_AND_JOB_TRAINING.json";
@@ -33,6 +42,7 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this, "pk.eyJ1IjoiaWxvYyIsImEiOiJjam55dmJlbmYxOXVzM2trajM3eno5bTIxIn0.jbJIOAYamYvN8QZNAk28bg");
         setContentView(R.layout.activity_employment_job_training);
 
         mapView = (MapView) findViewById(R.id.mapView);
@@ -118,11 +128,6 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
                 try {
                     DataSetJsonParser jsonParser = new DataSetJsonParser();
                     features = jsonParser.parse(jsonStr);
-
-                    Log.i("EmploymentJSON data", "Display JSON");
-                    for(Feature f : features) {
-                        Log.i("fromjson", f.toString());
-                    }
                 } catch (final JSONException e) {
                     Log.i("dropIn", "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
@@ -161,11 +166,29 @@ public class EmploymentJobTrainingActivity extends AppCompatActivity {
                 pDialog.dismiss();
 
             for(Feature f : features) {
+                String snippet = "";
+                snippet += "Description: " + f.getDescription() + "\n";
+                snippet += "Hours: " + f.getHours() + "\n";;
+                snippet += "Location: " + f.getLocation() + "\n";;
+                snippet += "Postcode: " + f.getPC() + "\n";;
+                snippet += "Phone: " + f.getPhone() + "\n";;
+                snippet += "Email: " + f.getEmail() + "\n";;
+                snippet += "Website: " + f.getWebsite() + "\n";;
                 mapboxMap.addMarker(
                         new MarkerOptions()
                             .position(new LatLng(f.getY(), f.getX()))
+                            .title(f.getName())
+                            .setSnippet(snippet)
                 );
             }
+
+            mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    mapboxMap.selectMarker(marker);
+                    return true;
+                }
+            });
         }
     }
 }
