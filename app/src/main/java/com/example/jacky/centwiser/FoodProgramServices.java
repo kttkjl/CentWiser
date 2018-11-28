@@ -2,6 +2,7 @@ package com.example.jacky.centwiser;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +14,13 @@ import android.widget.Toast;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.android.core.permissions.PermissionsListener;
+import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -27,10 +32,15 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
-public class FoodProgramServices extends AppCompatActivity {
+public class FoodProgramServices extends AppCompatActivity implements PermissionsListener {
     private MapView mapView;
     private MapboxMap mapboxMap;
+
+    // User location
+    private Location originLocation;
+    private PermissionsManager permissionsManager;
 
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
@@ -44,6 +54,7 @@ public class FoodProgramServices extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, "pk.eyJ1IjoiaWxvYyIsImEiOiJjam55dmJlbmYxOXVzM2trajM3eno5bTIxIn0.jbJIOAYamYvN8QZNAk28bg");
+
         setContentView(R.layout.activity_food_program_services);
 
         mapView = (MapView) findViewById(R.id.mapView);
@@ -58,11 +69,52 @@ public class FoodProgramServices extends AppCompatActivity {
                         .build());
                 mapboxMap = mapbox;
                 new GetFoodProgram().execute();
+                enableLocationComponent();
             }
         });
 
 
     }
+    // Current User location related ===============================================================
+    @SuppressWarnings( {"MissingPermission"})
+    private void enableLocationComponent() {
+        // Check if permissions are enabled and if not request
+        if (PermissionsManager.areLocationPermissionsGranted(this)) {
+            // Activate the MapboxMap LocationComponent to show user location
+            // Adding in LocationComponentOptions is also an optional parameter
+            LocationComponent locationComponent = mapboxMap.getLocationComponent();
+            locationComponent.activateLocationComponent(this);
+            locationComponent.setLocationComponentEnabled(true);
+            // Set the component's camera mode
+            locationComponent.setCameraMode(CameraMode.TRACKING);
+            originLocation = locationComponent.getLastKnownLocation();
+
+        } else {
+            permissionsManager = new PermissionsManager(this);
+            permissionsManager.requestLocationPermissions(this);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onExplanationNeeded(List<String> permissionsToExplain) {
+        Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPermissionResult(boolean granted) {
+        if (granted) {
+            enableLocationComponent();
+        } else {
+            Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+    // =============================================================================================
 
     @Override
     protected void onStart() {

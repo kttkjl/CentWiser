@@ -16,5 +16,7 @@
     <string name="title_activity_drop_in_map">Drop-in Centres</string>
     <string name="title_activity_emp_map">Employment and Job Training</string>
     <string name="title_activity_food_map">Food Program and Services</string>
+    <string name="user_location_permission_not_granted">Location permission not granted by user</string>
+    <string name="user_location_permission_explanation">Explaination needed</string>
 
 </resources>
