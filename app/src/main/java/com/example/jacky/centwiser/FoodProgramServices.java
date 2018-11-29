@@ -1,6 +1,5 @@
 package com.example.jacky.centwiser;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -8,10 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -24,14 +21,10 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
 
 public class FoodProgramServices extends AppCompatActivity implements PermissionsListener {
